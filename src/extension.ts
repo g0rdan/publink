@@ -10,16 +10,28 @@ export function activate(context: vscode.ExtensionContext) {
 	// This line of code will only be executed once when your extension is activated
 	console.log('Congratulations, your extension "publink" is now active!');
 
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	const disposable = vscode.commands.registerCommand('publink.helloWorld', () => {
-		// The code you place here will be executed every time your command is executed
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from publink!');
-	});
+	// Register hover provider
+    const hoverProvider = vscode.languages.registerHoverProvider('*', {
+        provideHover(document, position, token) {
+			const fileName = document.fileName;
 
-	context.subscriptions.push(disposable);
+			if (fileName.endsWith('pubspec.yaml')) {
+				const range = document.getWordRangeAtPosition(position);
+            	const packageName = document.getText(range);
+
+            	// Define the URL based on the packageName or any specific logic
+            	const url = `https://pub.dev/packages/${packageName}`;
+
+            	// Create the hover content
+            	const markdownString = new vscode.MarkdownString(`[Learn more about ${packageName}](${url})`);
+            	markdownString.isTrusted = true;
+
+            	return new vscode.Hover(markdownString);
+			}
+        }
+    });
+
+	context.subscriptions.push(hoverProvider);
 }
 
 // This method is called when your extension is deactivated

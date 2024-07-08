@@ -9,13 +9,17 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+    "onLanguage:yaml",
+    "onStartupFinished"
+  ],
   "main": "./out/extension.js",
   "contributes": {
-    "commands": [
+    "languages": [
       {
-        "command": "publink.helloWorld",
-        "title": "Hello World"
+        "id": "yaml",
+        "aliases": ["yml"],
+        "extensions": [".yaml", ".yml"]
       }
     ]
   },
