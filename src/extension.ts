@@ -13,21 +13,36 @@ export function activate(context: vscode.ExtensionContext) {
 	// Register hover provider
     const hoverProvider = vscode.languages.registerHoverProvider('*', {
         provideHover(document, position, token) {
-			const fileName = document.fileName;
-
-			if (fileName.endsWith('pubspec.yaml')) {
-				const range = document.getWordRangeAtPosition(position);
-            	const packageName = document.getText(range);
-
-            	// Define the URL based on the packageName or any specific logic
-            	const url = `https://pub.dev/packages/${packageName}`;
-
-            	// Create the hover content
-            	const markdownString = new vscode.MarkdownString(`[Learn more about ${packageName}](${url})`);
-            	markdownString.isTrusted = true;
-
-            	return new vscode.Hover(markdownString);
+			// Check if the current opened file in vscode is pubspec.yaml.
+			if (!document.fileName.endsWith('pubspec.yaml')) {
+				return null;
 			}
+
+			// Check if substring falls into a category of strings that starts with a white space, 
+			// than has a word that might contain "_", than ":" follows
+			if (!document.getWordRangeAtPosition(position, /^[\t ]+\b(?!sdk\b|assets\b)[\w_]+\b:/gm)) {
+				return null
+			}
+			
+			const range = document.getWordRangeAtPosition(position);
+			if (!range) {
+                return null
+            }
+
+			const startPosition = range.start.character;
+			const lineText = document.lineAt(position.line).text;
+			if (startPosition == 0 || lineText.charAt(startPosition - 1) !== ' ') {
+				return null;
+			}
+
+			const packageName = document.getText(range);
+                // Define the URL based on the word or any specific logic
+			const url = `https://pub.dev/packages/${packageName}`;
+			// Create the hover content
+			const markdownString = new vscode.MarkdownString(`Learn more about [${packageName}](${url})`);
+			markdownString.isTrusted = true;
+
+			return new vscode.Hover(markdownString);
         }
     });
 
