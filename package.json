@@ -3,7 +3,8 @@
   "publisher": "gordin",
   "displayName": "PubLink",
   "description": "PubLink allows you quickly open a flutter/dart package on pub.dev",
-  "version": "0.0.1",
+  "version": "0.0.2",
+  "license": "MIT",
   "icon": "assets/icons/main_icon.png",
   "repository": {
     "type": "git",
@@ -14,6 +15,12 @@
   },
   "categories": [
     "Other"
+  ],
+  "keywords": [
+    "flutter",
+    "dart",
+    "pub.dev",
+    "package"
   ],
   "activationEvents": [
     "onLanguage:yaml",

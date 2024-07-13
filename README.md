@@ -6,6 +6,10 @@ This extension allows you to see a hover with URL of the [pub.dev](https://pub.d
 
 ## Release Notes
 
+### [0.0.2]
+
+- Minor changes to package.json
+
 ### 0.0.1
 
 Initial release of publink
