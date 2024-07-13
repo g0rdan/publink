@@ -1,8 +1,8 @@
-# publink
+# PubLink
 
 This extension allows you to see a hover with URL of the [pub.dev](https://pub.dev) package when you hover over the package name in the `pubspec.yaml` file.
 
-![example hwo it works](assets/example.gif)
+![example hwo it works](assets/docs/example.gif)
 
 ## Release Notes
 
