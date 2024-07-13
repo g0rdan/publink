@@ -5,6 +5,10 @@
   "description": "PubLink allows you quickly open a flutter/dart package on pub.dev",
   "version": "0.0.1",
   "icon": "assets/icons/main_icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/g0rdan/publink"
+  },
   "engines": {
     "vscode": "^1.91.0"
   },
