@@ -30,7 +30,7 @@ jobs:
       - name: Exctract version from package.json
         id: version
         run: |
-          export PACKAGE_VERSION=$(echo $GITHUB_REF | sed -rn 's/refs\/heads\/(.*)/\1/p')
+          export PACKAGE_VERSION=$(grep '"version"' package.json | sed -E 's/.*"version": "([^"]+)".*/\1/')
           echo "PACKAGE_VERSION=$PACKAGE_VERSION"
 
       - name: Upload VSIX file as a release asset
