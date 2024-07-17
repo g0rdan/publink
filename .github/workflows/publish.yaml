@@ -27,8 +27,11 @@ jobs:
       - name: Package extension
         run: npx vsce package
 
-      - name: ls test
-        run: ls
+      - name: Exctract version from package.json
+        id: version
+        run: |
+          export PACKAGE_VERSION=$(echo $GITHUB_REF | sed -rn 's/refs\/heads\/(.*)/\1/p')
+          echo "PACKAGE_VERSION=$PACKAGE_VERSION"
 
       - name: Upload VSIX file as a release asset
         uses: actions/upload-release-asset@v1
