@@ -32,16 +32,17 @@ jobs:
         run: |
           export PACKAGE_VERSION=$(grep '"version"' package.json | sed -E 's/.*"version": "([^"]+)".*/\1/')
           echo "PACKAGE_VERSION=$PACKAGE_VERSION"
+          echo "::set-output name=package_version::$PACKAGE_VERSION"
 
       - name: Upload VSIX file as a release asset
         uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ github.event.release.upload_url }}
-          asset_path: ./publink-$PACKAGE_VERSION.vsix
-          asset_name: publink.vsix
+          asset_path: ./publink-${{ steps.version.outputs.package_version }}.vsix
+          asset_name: publink-${{ steps.version.outputs.package_version }}.vsix
           asset_content_type: application/octet-stream
 
-    #   - name: Publish extension
-    #     env:
-    #       VSCE_PAT: ${{ secrets.AZURE_PAT }}
-    #     run: npx vsce publish
+      - name: Publish extension
+        env:
+          VSCE_PAT: ${{ secrets.AZURE_PAT }}
+        run: npx vsce publish
