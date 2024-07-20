@@ -18,7 +18,7 @@ export function activate(context: vscode.ExtensionContext) {
     const hoverProvider = vscode.languages.registerHoverProvider('*', {
         async provideHover(document, position, token) {
 			const publinkData = await module.extractPackageInfo(document, position);
-			if (publinkData != null) {
+			if (publinkData !== null) {
 				// Create the hover content
 				const markdownString = new vscode.MarkdownString(`Learn more about [${publinkData.name}](${publinkData.url})`);
 				markdownString.isTrusted = true;
