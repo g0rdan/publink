@@ -14,17 +14,17 @@ export class PubLinkModule {
         // Check if substring falls into a category of strings that starts with a white space, 
         // than has a word that might contain "_", than ":" follows
         if (!document.getWordRangeAtPosition(position, this.regex)) {
-            return null
+            return null;
         }
         
         const range = document.getWordRangeAtPosition(position);
         if (!range) {
-            return null
+            return null;
         }
 
         const startPosition = range.start.character;
         const lineText = document.lineAt(position.line).text;
-        if (startPosition == 0 || lineText.charAt(startPosition - 1) !== ' ') {
+        if (startPosition === 0 || lineText.charAt(startPosition - 1) !== ' ') {
             return null;
         }
 
@@ -35,7 +35,7 @@ export class PubLinkModule {
         // We want to make sure the URL is valid. There could be situations where
         // we have a git or local dependency, we don't want to mislead users with
         // these URLs.
-        const isUrlValid = await this.checkURL(url)
+        const isUrlValid = await this.checkURL(url);
         if (!isUrlValid) {
             return null;
         }
@@ -50,10 +50,10 @@ export class PubLinkModule {
         const response = await fetch(url, {
             method: 'HEAD',
         });
-        return response.ok
+        return response.ok;
     } catch (error) {
         console.error('Error during the HEAD request', error);
-		return false
+		return false;
     }
 }
 }
