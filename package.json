@@ -3,7 +3,7 @@
   "publisher": "gordin",
   "displayName": "PubLink",
   "description": "PubLink allows you quickly open a flutter/dart package on pub.dev",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "license": "MIT",
   "icon": "assets/icons/main_icon.png",
   "repository": {

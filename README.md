@@ -6,6 +6,10 @@ This extension allows you to see a hover with URL of the [pub.dev](https://pub.d
 
 ## Release Notes
 
+### 0.1.0
+
+- Added pub.dev parsing for extracting package information
+
 ### 0.0.3
 
 - Better determination if a package has URL or not
