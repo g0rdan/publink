@@ -38,15 +38,12 @@ export class PubLinkModule {
     // Define the URL based on the word or any specific logic
     const url = `https://pub.dev/packages/${packageName}`;
 
-    // We want to make sure the URL is valid. There could be situations where
-    // we have a git or local dependency, we don't want to mislead users with
-    // these URLs.
-    const isUrlValid = await this.checkURL(url);
-    if (!isUrlValid) {
+    var data = await this.fetchAndParse(url);
+    if (data === null) {
       return null;
     }
 
-    const data = (await this.fetchAndParse(url)).copyWith({
+    data = data.copyWith({
       name: packageName,
       url: url,
     });
@@ -54,25 +51,18 @@ export class PubLinkModule {
     return data;
   }
 
-  // Check if given URL is valid by sending a HEAD request and
-  // awaiting for 200 OK
-  async checkURL(url: string): Promise<boolean> {
-    try {
-      const response = await fetch(url, {
-        method: "HEAD",
-      });
-      return response.ok;
-    } catch (error) {
-      console.error("Error during the HEAD request", error);
-      return false;
-    }
-  }
-
-  async fetchAndParse(url: string): Promise<PackageData> {
+  async fetchAndParse(url: string): Promise<PackageData | null> {
     var data = new PackageData();
     try {
       // Fetch the HTML content from the web
       const response = await axios.get(url);
+      // We want to make sure the URL is valid. There could be situations where
+      // we have a git or local dependency, we don't want to mislead users with
+      // these URLs.
+      if (response.status !== 200) {
+        return null;
+      }
+
       const html = response.data;
 
       // Parse the HTML content using jsdom

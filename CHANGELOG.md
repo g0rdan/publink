@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.1.1]
+
+- Simplify http requests
+
 ## [0.1.0]
 
 - Added pub.dev parsing for extracting package information
