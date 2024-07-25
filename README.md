@@ -1,5 +1,7 @@
 # PubLink
 
+[Marketplace](https://marketplace.visualstudio.com/items?itemName=gordin.publink)
+
 This extension allows you to see a hover with package's info from [pub.dev](https://pub.dev) when you hover over the package name in the `pubspec.yaml` file.
 
 ![version_0 1 0](https://github.com/user-attachments/assets/bae475ee-6821-4c03-b24b-81a5a8571d0b)
