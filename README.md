@@ -6,6 +6,10 @@ This extension allows you to see a hover with package's info from [pub.dev](http
 
 ## Release Notes
 
+### 0.1.1
+
+- Simplify http requests
+
 ### 0.1.0
 
 - Added pub.dev parsing for extracting package information
