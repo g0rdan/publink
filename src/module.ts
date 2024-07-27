@@ -34,7 +34,7 @@ export class PubLinkModule {
       return null;
     }
 
-    const packageName = document.getText(range);
+    const packageName = document.getText(range).replace(":", "");
     // Define the URL based on the word or any specific logic
     const url = `https://pub.dev/packages/${packageName}`;
 
