@@ -2,7 +2,7 @@
 
 ## [0.1.2]
 
-- Attempt to fix "semicolon" [issue](https://github.com/g0rdan/publink/issues/5)
+- Attempt to fix "colon" [issue](https://github.com/g0rdan/publink/issues/5)
 
 ## [0.1.1]
 
