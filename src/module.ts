@@ -55,15 +55,20 @@ export class PubLinkModule {
     var data = new PackageData();
     try {
       // Fetch the HTML content from the web
-      const response = await axios.get(url);
+      const response = await axios.get(url).catch((error) => {
+        // If a request is outside of the 200 range, we want to return null
+        if (error.response) {
+          return null;
+        }
+      });
       // We want to make sure the URL is valid. There could be situations where
       // we have a git or local dependency, we don't want to mislead users with
       // these URLs.
-      if (response.status !== 200) {
+      if (response === null) {
         return null;
       }
 
-      const html = response.data;
+      const html = response!.data;
 
       // Parse the HTML content using jsdom
       const dom = new JSDOM(html);

@@ -8,6 +8,10 @@ This extension allows you to see a hover with package's info from [pub.dev](http
 
 ## Release Notes
 
+### 0.1.3
+
+- Fix issue when we try to show URL to a package that does not exist on pub.dev.
+
 ### 0.1.2
 
 - Attempt to fix "colon" [issue](https://github.com/g0rdan/publink/issues/5)
