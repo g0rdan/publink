@@ -2,7 +2,7 @@
 
 ## [0.1.3]
 
-- Fix issue when we try to show URL to a package that does not exist on pub.dev
+- Fix issue when we try to show URL to a package that does not exist on pub.dev.
 
 ## [0.1.2]
 
