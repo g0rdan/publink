@@ -2,11 +2,10 @@ import { JSDOM } from "jsdom";
 import { PackageData } from "./data";
 import * as vscode from "vscode";
 import axios from "axios";
+import { extractPackageNames } from "./functions";
 
 export class PubLinkModule {
   fileName: string = "pubspec.yaml";
-  regex: RegExp =
-    /^[\t ]+\b(?!sdk\b|git\b|url\b|ref\b|path\b|assets\b)[\w_]+\b:/gm;
 
   public async extractPackageInfo(
     document: vscode.TextDocument,
@@ -14,12 +13,6 @@ export class PubLinkModule {
   ): Promise<PackageData | null> {
     // Check if the current opened file in vscode is pubspec.yaml.
     if (!document.fileName.endsWith(this.fileName)) {
-      return null;
-    }
-
-    // Check if substring falls into a category of strings that starts with a white space,
-    // than has a word that might contain "_", than ":" follows
-    if (!document.getWordRangeAtPosition(position, this.regex)) {
       return null;
     }
 
@@ -35,6 +28,11 @@ export class PubLinkModule {
     }
 
     const packageName = document.getText(range).replace(":", "");
+    const names = extractPackageNames(document.fileName);
+    if (!names.includes(packageName)) {
+      return null;
+    }
+
     // Define the URL based on the word or any specific logic
     const url = `https://pub.dev/packages/${packageName}`;
 
